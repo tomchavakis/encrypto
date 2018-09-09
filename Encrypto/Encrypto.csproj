@@ -5,12 +5,11 @@
     <PackAsTool>true</PackAsTool>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>dotnet-encrypto</AssemblyName>
-    <RootNamespace>Encrypto.App</RootNamespace>
     <PackageType>DotnetTool</PackageType>
     <RepositoryType>git</RepositoryType>
     <PackageId>dotnet-encrypto</PackageId>
     <ToolCommandName>dotnet-encrypto</ToolCommandName>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Tom Chavakis</Authors>
     <Company>Encrypto</Company>
     <Title>.NET Core Tool to encrypt/decrypt folders or files</Title>
