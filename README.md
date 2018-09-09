@@ -6,12 +6,19 @@
 
 This Application is .NET Core Application. The main purpose is to encrypt or decrypt a folder or unique file using AES 256 Encryption Algorithm.
 
-## Installation Of .NET Core
+## Usage
 
-## Example
+Usage: dotnet Encrypto.App.dll [options]
+
+Options:
+  --help            Show help information
+  -i                Input Folder or File
 
 ### Encrypt Folder
-dotnet FilesEncryption.Core.dll encrypt -i /home/tcs/Downloads/
+dotnet Encrypto.App.dll encrypt -i /home/tcs/Downloads/
 
 ### Decrypt Folder
-dotnet FilesEncryption.Core.dll decrypt -i /home/tcs/Downloads/
+dotnet Encrypto.App.dll decrypt -i /home/tcs/Downloads/
+
+### using global tool
+dotnet tool install --global dotnet-Encrypto.App
