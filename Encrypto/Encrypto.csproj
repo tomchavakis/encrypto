@@ -4,9 +4,12 @@
     <IsPackable>true</IsPackable>
     <PackAsTool>true</PackAsTool>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>Encrypto.App</AssemblyName>
+    <AssemblyName>dotnet-encrypto</AssemblyName>
     <RootNamespace>Encrypto.App</RootNamespace>
-    <PackageId>Encrypto</PackageId>
+    <PackageType>DotnetTool</PackageType>
+    <RepositoryType>git</RepositoryType>
+    <PackageId>dotnet-encrypto</PackageId>
+    <ToolCommandName>dotnet-encrypto</ToolCommandName>
     <Version>1.0.0</Version>
     <Authors>Tom Chavakis</Authors>
     <Company>Encrypto</Company>

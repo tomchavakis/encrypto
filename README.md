@@ -21,4 +21,4 @@ dotnet Encrypto.App.dll encrypt -i /home/tcs/Downloads/
 dotnet Encrypto.App.dll decrypt -i /home/tcs/Downloads/
 
 ### using global tool
-dotnet tool install --global dotnet-Encrypto.App
+dotnet tool install --global dotnet-encrypto
