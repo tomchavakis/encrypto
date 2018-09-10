@@ -25,5 +25,7 @@ dotnet tool install --global dotnet-encrypto
 
 ### Using tool
 dotnet-encrypto --help
+
 dotnet-encrypto encrypt -i /home/tcs/Downloads/
+
 dotnet-encrypto decrypt -i /home/tcs/Downloads/
