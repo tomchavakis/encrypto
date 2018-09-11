@@ -2,9 +2,12 @@
 
 ## Application - Instructions
 
-### 1. FilesEncryption.Core 
+### 1. Encrypto
 
-This Application is .NET Core Application. The main purpose is to encrypt or decrypt a folder or unique file using AES 256 Encryption Algorithm.
+This Application is dotnet tool and .net core 2.1 Application. 
+
+The main purpose of this tool is to encrypt or decrypt a folder(s) or unique file(s) using AES 256 Encryption Algorithm.
+Data will be encrypted with your preferred password.
 
 ## Usage
 
