@@ -10,22 +10,40 @@ This Application is .NET Core Application. The main purpose is to encrypt or dec
 
 Usage: dotnet dotnet-encrypto.dll [options]
 
+Params:
+
+encrypt            Encrypt Folder or Files
+
+decrypt            Decrypt Folder or Files
+
 Options:
-  --help            Show help information
-  -i                Input Folder or File
+
+--help            Show help information
+  
+-i                Input Folder or File
+
+### using global tool (Install tool)
+
+dotnet tool install --global dotnet-encrypto
+
+### using global tool (Uninstall tool)
+
+dotnet tool uninstall --global dotnet-encrypto
+
+### Using tool
+
+dotnet-encrypto --help
+
+Encrypt Folder or Files :
+
+dotnet-encrypto encrypt -i /home/tcs/Downloads/
+
+Decrypt Folder or Files
+
+dotnet-encrypto decrypt -i /home/tcs/Downloads/
 
 ### Encrypt Folder
 dotnet dotnet-encrypto.dll encrypt -i /home/tcs/Downloads/
 
 ### Decrypt Folder
 dotnet dotnet-encrypto.dll decrypt -i /home/tcs/Downloads/
-
-### using global tool
-dotnet tool install --global dotnet-encrypto
-
-### Using tool
-dotnet-encrypto --help
-
-dotnet-encrypto encrypt -i /home/tcs/Downloads/
-
-dotnet-encrypto decrypt -i /home/tcs/Downloads/
