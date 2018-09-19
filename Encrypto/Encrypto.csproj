@@ -9,10 +9,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageId>dotnet-encrypto</PackageId>
     <ToolCommandName>dotnet-encrypto</ToolCommandName>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Tom Chavakis</Authors>
     <Company>Encrypto</Company>
-    <Title>.NET Core Tool to encrypt/decrypt folders or files</Title>
+    <Title>.NET Core Tool to encrypt/decrypt folder(s) or file(s)</Title>
     <PackageProjectUrl>https://github.com/tomchavakis/encrypto</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

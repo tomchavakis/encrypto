@@ -82,10 +82,6 @@ namespace Encrypto
 
                     return 1;
                 });
-
-            Console.WriteLine("Application Finished...");
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
         }
 
         private static string ReadLines(string fileName, bool fromTop, int count)

@@ -15,9 +15,9 @@ Usage: dotnet dotnet-encrypto.dll [options]
 
 Params:
 
-encrypt            Encrypt Folder or Files
+encrypt            Encrypt Folder(s) or Files
 
-decrypt            Decrypt Folder or Files
+decrypt            Decrypt Folder(s) or Files
 
 Options:
 
@@ -37,11 +37,11 @@ dotnet tool uninstall --global dotnet-encrypto
 
 dotnet-encrypto --help
 
-Encrypt Folder or Files :
+Encrypt Folder(s) or Files :
 
 dotnet-encrypto encrypt -i /home/tcs/Downloads/
 
-Decrypt Folder or Files
+Decrypt Folder(s) or Files
 
 dotnet-encrypto decrypt -i /home/tcs/Downloads/
 
