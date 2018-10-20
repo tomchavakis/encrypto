@@ -66,6 +66,38 @@ namespace Encrypto.AESLibrary
             return decryptedbytes;
         }
 
+        public static string EncryptText(string inputText, string password)
+        {
+            string result = string.Empty;
+
+            ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
+
+            try
+            {
+                locker.EnterReadLock();
+
+                byte[] bytestoencrypted = System.Text.ASCIIEncoding.ASCII.GetBytes(inputText);
+                byte[] passwordToByteArray = Encoding.UTF8.GetBytes(password);
+
+                //hash the password with sha256
+                passwordToByteArray = SHA256.Create().ComputeHash(passwordToByteArray);
+
+                byte[] encryptedByteArray = AES.GetEncryptedByteArray(bytestoencrypted, passwordToByteArray);
+                result = System.Text.ASCIIEncoding.ASCII.GetString(encryptedByteArray);
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                return "encryption failed";
+            }
+            finally
+            {
+                locker.ExitReadLock();
+            }
+
+        }
+
         public static string EncryptFile(string inputFile, string outputFile, string password)
         {
             ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
@@ -112,6 +144,32 @@ namespace Encrypto.AESLibrary
 
                 File.WriteAllBytes(outputFile, bytesDecrypted);
                 return "Decryption succeeded";
+            }
+            catch (Exception e)
+            {
+                return "Decryption failed";
+            }
+            finally
+            {
+                locker.ExitReadLock();
+            }
+        }
+
+        public static string DecryptText(byte[] inputText, string password)
+        {
+            string result = string.Empty;
+            ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
+            try
+            {
+                locker.EnterReadLock();
+
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+                passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+                byte[] bytesDecrypted = AES.GetDecryptedByteArray(inputText, passwordBytes);
+
+                result = System.Text.ASCIIEncoding.ASCII.GetString(bytesDecrypted);
+                return result;
             }
             catch (Exception e)
             {
