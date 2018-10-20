@@ -38,7 +38,7 @@ namespace Encrypto
                     {
                         Console.WriteLine("Encryption Started...");
                         Console.WriteLine("Password:");
-                        string pass = "asd";
+                        string pass = Console.ReadLine();
                         Console.WriteLine(string.Format("{0} | Result:{1}", options.InputText, Base64Encode(AES.EncryptText(options.InputText, pass))));
                         Console.WriteLine("Encryption Finished...");
                     }
@@ -77,8 +77,7 @@ namespace Encrypto
                     {
                         Console.WriteLine("Decryption Started...");
                         Console.WriteLine("Password:");
-                        //string pass = Console.ReadLine();
-                        string pass = "asd";
+                        string pass = Console.ReadLine();
                         byte[] base64decode = Base64Decode(options.InputText); //base64 decoding
                         Console.WriteLine(string.Format("{0} | Result:{1}", base64decode, AES.DecryptText(base64decode, pass)));
                         Console.WriteLine("Decryption Finished...");
