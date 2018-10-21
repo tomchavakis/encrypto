@@ -38,14 +38,17 @@ namespace Encrypto
                     {
                         Console.WriteLine("Encryption Started...");
                         Console.WriteLine("Password:");
-                        string pass = Console.ReadLine();
-                        Console.WriteLine(string.Format("{0} | Result:{1}", options.InputText, Base64Encode(AES.EncryptText(options.InputText, pass))));
+                        //string pass = Console.ReadLine();
+                        string pass = "asd";
+                        Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, Base64Encode(AES.EncryptText(options.InputText, pass))));
+
                         Console.WriteLine("Encryption Finished...");
                     }
                     else
                     {
                         if (string.IsNullOrEmpty(options.InputFile) || string.IsNullOrEmpty(options.InputText))
                         {
+                            Console.WriteLine("ERROR(S):");
                             Console.WriteLine("-i\tInput File(s) or Folder(s) to encrypt.");
                             Console.WriteLine("-t\tInsert the text to encrypt.");
                         }
@@ -77,9 +80,10 @@ namespace Encrypto
                     {
                         Console.WriteLine("Decryption Started...");
                         Console.WriteLine("Password:");
-                        string pass = Console.ReadLine();
+                        //string pass = Console.ReadLine();
+                        string pass = "asd";
                         byte[] base64decode = Base64Decode(options.InputText); //base64 decoding
-                        Console.WriteLine(string.Format("{0} | Result:{1}", base64decode, AES.DecryptText(base64decode, pass)));
+                        Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, AES.DecryptText(base64decode, pass)));
                         Console.WriteLine("Decryption Finished...");
                     }
                     else
@@ -118,13 +122,14 @@ namespace Encrypto
 
         public static string Base64Encode(string plainText)
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            var plainTextBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
         }
 
         public static byte[] Base64Decode(string plainText)
         {
-            var base64EncodedBytes = System.Convert.FromBase64String(plainText);
+            byte[] base64EncodedBytes = System.Convert.FromBase64String(plainText);
+            // string base64decoded = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
             return base64EncodedBytes;
         }
 
@@ -133,10 +138,10 @@ namespace Encrypto
             var bytes = File.ReadAllBytes(fileName);
             if (fromTop)
             {
-                return Encoding.UTF8.GetString(bytes, 0, count);
+                return System.Text.ASCIIEncoding.ASCII.GetString(bytes, 0, count);
             }
 
-            return Encoding.UTF8.GetString(bytes, bytes.Length - count, count);
+            return System.Text.ASCIIEncoding.Default.GetString(bytes, bytes.Length - count, count);
         }
 
         private static Tuple<string, string> MakeError()
