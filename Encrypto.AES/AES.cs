@@ -68,7 +68,7 @@ namespace Encrypto.AESLibrary
             return decryptedbytes;
         }
 
-        public static string EncryptText(string inputText, string password)
+        public static byte[] EncryptText(string inputText, string password)
         {
             string result = string.Empty;
 
@@ -78,21 +78,17 @@ namespace Encrypto.AESLibrary
             {
                 locker.EnterReadLock();
 
-                byte[] bytestoencrypted = System.Text.Encoding.ASCII.GetBytes(inputText);
-                byte[] passwordToByteArray = System.Text.ASCIIEncoding.ASCII.GetBytes(password);
-
-                //hash the password with sha256
+                byte[] bytestoencrypted = System.Text.Encoding.UTF8.GetBytes(inputText);
+                byte[] passwordToByteArray = System.Text.Encoding.UTF8.GetBytes(password);
                 passwordToByteArray = SHA256.Create().ComputeHash(passwordToByteArray);
-
                 byte[] encryptedByteArray = AES.GetEncryptedByteArray(bytestoencrypted, passwordToByteArray);
-                result = System.Text.ASCIIEncoding.ASCII.GetString(encryptedByteArray);
                 
-                return result;
+                return encryptedByteArray;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return "encryption failed";
+                return null;
             }
             finally
             {
@@ -121,7 +117,7 @@ namespace Encrypto.AESLibrary
                 return "encryption succeeded";
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "encryption failed";
             }
@@ -148,7 +144,7 @@ namespace Encrypto.AESLibrary
                 File.WriteAllBytes(outputFile, bytesDecrypted);
                 return "Decryption succeeded";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "Decryption failed";
             }
@@ -165,16 +161,13 @@ namespace Encrypto.AESLibrary
             try
             {
                 locker.EnterReadLock();
-                // byte[] bytesToBeDecrypted = Encoding.UTF8.GetBytes(input);
-                byte[] passwordBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(password);
+                byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
                 passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
                 byte[] bytesDecrypted = AES.GetDecryptedByteArray(input, passwordBytes);
-
                 result = System.Text.Encoding.UTF8.GetString(bytesDecrypted);
                 return result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "Decryption failed";
             }

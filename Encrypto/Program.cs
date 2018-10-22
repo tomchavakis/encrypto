@@ -38,8 +38,7 @@ namespace Encrypto
                     {
                         Console.WriteLine("Encryption Started...");
                         Console.WriteLine("Password:");
-                        //string pass = Console.ReadLine();
-                        string pass = "asd";
+                        string pass = Console.ReadLine();
                         Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, Base64Encode(AES.EncryptText(options.InputText, pass))));
 
                         Console.WriteLine("Encryption Finished...");
@@ -80,9 +79,8 @@ namespace Encrypto
                     {
                         Console.WriteLine("Decryption Started...");
                         Console.WriteLine("Password:");
-                        //string pass = Console.ReadLine();
-                        string pass = "asd";
-                        byte[] base64decode = Base64Decode(options.InputText); //base64 decoding
+                        string pass = Console.ReadLine();
+                        byte[] base64decode = Base64Decode(options.InputText);
                         Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, AES.DecryptText(base64decode, pass)));
                         Console.WriteLine("Decryption Finished...");
                     }
@@ -120,17 +118,14 @@ namespace Encrypto
             return string.Join(Environment.NewLine, lines.Reverse().Take(count));
         }
 
-        public static string Base64Encode(string plainText)
+        public static string Base64Encode(byte[] input)
         {
-            var plainTextBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
+            return System.Convert.ToBase64String(input);
         }
 
         public static byte[] Base64Decode(string plainText)
         {
-            byte[] base64EncodedBytes = System.Convert.FromBase64String(plainText);
-            // string base64decoded = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-            return base64EncodedBytes;
+            return System.Convert.FromBase64String(plainText);
         }
 
         private static string ReadBytes(string fileName, bool fromTop, int count)
