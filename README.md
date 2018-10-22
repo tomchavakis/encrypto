@@ -48,3 +48,14 @@ Encrypt Folder(s) or Files :
 Decrypt Folder(s) or Files
 
 `dotnet-encrypto decrypt -i /home/tcs/Downloads/`
+
+Encrypt Text:
+
+Create a base64 encoded encrypted text:
+
+`dotnet-encrypto encrypt -t "tom"`
+
+Decrypt Text:
+
+`dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g=="`
+
