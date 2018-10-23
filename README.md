@@ -59,3 +59,7 @@ Create a base64 encoded encrypted text:
 
 `dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g=="`
 
+## Nuget
+
+https://www.nuget.org/packages/dotnet-encrypto
+
