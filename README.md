@@ -61,7 +61,7 @@ Create a base64 encoded encrypted text:
 
 ## Travis
 
-[![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=master)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=master)
+[![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)
 
 ## Nuget
 
