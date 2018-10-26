@@ -59,6 +59,10 @@ Create a base64 encoded encrypted text:
 
 `dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g=="`
 
+## Travis
+
+[![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=master)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=master)
+
 ## Nuget
 
 https://www.nuget.org/packages/dotnet-encrypto
