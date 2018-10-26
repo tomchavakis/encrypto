@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CommandLine;
 using Encrypto.AESLibrary;
+using Encrypto.Utils;
 
 namespace Encrypto
 {
@@ -39,7 +40,7 @@ namespace Encrypto
                         Console.WriteLine("Encryption Started...");
                         Console.WriteLine("Password:");
                         string pass = Console.ReadLine();
-                        Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, Base64Encode(AES.EncryptText(options.InputText, pass))));
+                        Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, Utilities.Base64Encode(AES.EncryptText(options.InputText, pass))));
 
                         Console.WriteLine("Encryption Finished...");
                     }
@@ -80,7 +81,7 @@ namespace Encrypto
                         Console.WriteLine("Decryption Started...");
                         Console.WriteLine("Password:");
                         string pass = Console.ReadLine();
-                        byte[] base64decode = Base64Decode(options.InputText);
+                        byte[] base64decode = Utilities.Base64Decode(options.InputText);
                         Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, AES.DecryptText(base64decode, pass)));
                         Console.WriteLine("Decryption Finished...");
                     }
@@ -118,16 +119,7 @@ namespace Encrypto
             return string.Join(Environment.NewLine, lines.Reverse().Take(count));
         }
 
-        public static string Base64Encode(byte[] input)
-        {
-            return System.Convert.ToBase64String(input);
-        }
-
-        public static byte[] Base64Decode(string plainText)
-        {
-            return System.Convert.FromBase64String(plainText);
-        }
-
+       
         private static string ReadBytes(string fileName, bool fromTop, int count)
         {
             var bytes = File.ReadAllBytes(fileName);

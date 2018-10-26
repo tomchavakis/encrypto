@@ -1,0 +1,6 @@
+language: csharp
+solution: Encrypto.sln
+dotnet: 2.1.403
+script:
+  - dotnet restore
+  - dotnet test test/Encrypto.Tests/Encrypto.Test.csproj

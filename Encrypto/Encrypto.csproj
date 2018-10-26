@@ -23,4 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Encrypto.AES\AES.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Encrypto.Utils\Encrypto.Utils.csproj" />
+  </ItemGroup>
 </Project>
