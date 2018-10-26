@@ -1,5 +1,9 @@
 # Encryption Tool
 
+[![CodeFactor](https://www.codefactor.io/repository/github/tomchavakis/encrypto/badge)](https://www.codefactor.io/repository/github/tomchavakis/encrypto/overview/develop)
+
+[![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)
+
 ## Application - Instructions
 
 ### 1. Encrypto
@@ -58,10 +62,6 @@ Create a base64 encoded encrypted text:
 #### Decrypt Text:
 
 `dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g=="`
-
-## Travis
-
-[![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)
 
 ## Nuget
 
