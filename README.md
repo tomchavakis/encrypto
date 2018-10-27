@@ -1,7 +1,4 @@
-# Encryption Tool
-
-[![CodeFactor](https://www.codefactor.io/repository/github/tomchavakis/encrypto/badge)](https://www.codefactor.io/repository/github/tomchavakis/encrypto/overview/develop)
-[![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)
+# Encryption Tool [![CodeFactor](https://www.codefactor.io/repository/github/tomchavakis/encrypto/badge)](https://www.codefactor.io/repository/github/tomchavakis/encrypto/overview/develop) [![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)
 
 ## Application - Instructions
 
@@ -43,6 +40,14 @@ Usage: dotnet-encrypto [params] [options]
 ## Using tool
 
 `dotnet-encrypto --help`
+
+Usage:
+
+`dotnet-encrypto encrypt --help`
+
+Usage :
+
+`dotnet-encrypto decrypt --help`
 
 #### Encrypt Folder(s) or Files :
 
