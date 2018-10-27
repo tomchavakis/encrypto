@@ -1,7 +1,8 @@
-using NUnit.Framework;
-using Encrypto.Utils;
 using System.Text;
-namespace Tests
+using Encrypto.Utils;
+using NUnit.Framework;
+
+namespace Encrypto.Test
 {
     public class UtilitiesTest
     {
