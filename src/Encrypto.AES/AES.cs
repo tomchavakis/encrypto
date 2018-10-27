@@ -29,10 +29,8 @@ namespace Encrypto.AESLibrary
                         cs.Write(encryptedBytes, 0, encryptedBytes.Length);
                         cs.Close();
                     }
-
                     encyptedbytes = ms.ToArray();
                 }
-
                 return encyptedbytes;
             }
         }
@@ -40,8 +38,6 @@ namespace Encrypto.AESLibrary
         public static byte[] GetDecryptedByteArray(byte[] bytesDecrypted, byte[] password)
         {
             byte[] decrypted = null;
-
-
             byte[] saltBytes = new byte[] {1, 2, 3, 4, 5, 6, 7, 8};
             using (MemoryStream ms = new MemoryStream())
             {
@@ -54,33 +50,27 @@ namespace Encrypto.AESLibrary
                     aes.IV = key.GetBytes(aes.BlockSize / 8);
                     aes.Mode = CipherMode.CBC;
                     aes.Padding = PaddingMode.Zeros;
-
                     using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
                     {
                         cs.Write(bytesDecrypted, 0, bytesDecrypted.Length);
                         cs.Close();
                     }
-
                     decrypted = ms.ToArray();
                 }
             }
-
             return decrypted;
         }
 
         public static byte[] EncryptText(string inputText, string password)
         {
             ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
-
             try
             {
                 locker.EnterReadLock();
-
                 byte[] encryptedBytes = System.Text.Encoding.UTF8.GetBytes(inputText);
                 byte[] passwordToByteArray = System.Text.Encoding.UTF8.GetBytes(password);
                 passwordToByteArray = SHA256.Create().ComputeHash(passwordToByteArray);
                 byte[] encryptedByteArray = AES.GetEncryptedByteArray(encryptedBytes, passwordToByteArray);
-
                 return encryptedByteArray;
             }
             catch (Exception)
@@ -96,19 +86,14 @@ namespace Encrypto.AESLibrary
         public static string EncryptFile(string inputFile, string outputFile, string password)
         {
             ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
-
             try
             {
                 locker.EnterReadLock();
-
                 byte[] encryptedBytes = File.ReadAllBytes(inputFile);
                 byte[] passwordToByteArray = System.Text.Encoding.ASCII.GetBytes(password);
-
                 //hash the password with sha256
                 passwordToByteArray = SHA256.Create().ComputeHash(passwordToByteArray);
-
                 byte[] encryptedByteArray = AES.GetEncryptedByteArray(encryptedBytes, passwordToByteArray);
-
                 File.WriteAllBytes(outputFile, encryptedByteArray);
                 return "encryption succeeded";
             }
@@ -125,17 +110,13 @@ namespace Encrypto.AESLibrary
         public static string DecryptFile(string inputFile, string outputFile, string password)
         {
             ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
-
             try
             {
                 locker.EnterReadLock();
-
                 byte[] bytesToBeDecrypted = File.ReadAllBytes(outputFile);
                 byte[] passwordBytes = System.Text.Encoding.ASCII.GetBytes(password);
                 passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
                 byte[] bytesDecrypted = AES.GetDecryptedByteArray(bytesToBeDecrypted, passwordBytes);
-
                 File.WriteAllBytes(outputFile, bytesDecrypted);
                 return "Decryption succeeded";
             }

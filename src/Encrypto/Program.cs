@@ -12,7 +12,6 @@ namespace Encrypto
         static void Main(string[] args)
         {
             var result = CommandLine.Parser.Default.ParseArguments<EncryptOptions, DecryptOptions>(args);
-
             result.MapResult(
                 (EncryptOptions options) =>
                 {
@@ -51,7 +50,6 @@ namespace Encrypto
                             Console.WriteLine("-t\tInsert the text to encrypt.");
                         }
                     }
-
                     return 0;
                 },
                 (DecryptOptions options) =>
@@ -91,22 +89,14 @@ namespace Encrypto
                             Console.WriteLine("-t\tInsert the text to decrypt.");
                         }
                     }
-
                     return 0;
                 },
                 errors =>
                 {
                     var invalidTokens = errors.Where(x => x is TokenError).ToList();
                     invalidTokens.ForEach(token => Console.WriteLine(((TokenError)token).Token));
-
                     return 1;
                 });
         }
-
-        
-
-      
-
-        
     }
 }
