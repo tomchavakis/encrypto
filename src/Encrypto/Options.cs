@@ -14,7 +14,7 @@ namespace Encrypto
         public string InputText { get; set; }
     }
 
-    [Verb("decrypt", HelpText = "Dencrypt File(s) Or Folder(s")]
+    [Verb("decrypt", HelpText = "Decrypt File(s) Or Folder(s")]
     class DecryptOptions
     { //normal options here
 

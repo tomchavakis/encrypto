@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encrypto", "Encrypto\Encrypto.csproj", "{56C7338B-C497-498C-A28D-CA7D040552A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encrypto", "src\Encrypto\Encrypto.csproj", "{56C7338B-C497-498C-A28D-CA7D040552A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AES", "Encrypto.AES\AES.csproj", "{1AC47DD8-D54F-4800-B790-7E635B9EAF6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AES", "src\Encrypto.AES\AES.csproj", "{1AC47DD8-D54F-4800-B790-7E635B9EAF6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D22A4B07-FD66-43BC-98B5-93DEFAD1BE2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encrypto.Test", "test\Encrypto.Tests\Encrypto.Test.csproj", "{B55BE6C2-F53D-4C3B-BF3C-9DDB17646281}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encrypto.Utils", "Encrypto.Utils\Encrypto.Utils.csproj", "{BE5AEC35-254E-4B32-AF54-FC83490F3519}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encrypto.Utils", "src\Encrypto.Utils\Encrypto.Utils.csproj", "{BE5AEC35-254E-4B32-AF54-FC83490F3519}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{54A7CC97-E1FD-4A85-BFC7-FC12BB3C998B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,5 +79,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B55BE6C2-F53D-4C3B-BF3C-9DDB17646281} = {D22A4B07-FD66-43BC-98B5-93DEFAD1BE2C}
+		{1AC47DD8-D54F-4800-B790-7E635B9EAF6F} = {54A7CC97-E1FD-4A85-BFC7-FC12BB3C998B}
+		{56C7338B-C497-498C-A28D-CA7D040552A5} = {54A7CC97-E1FD-4A85-BFC7-FC12BB3C998B}
+		{BE5AEC35-254E-4B32-AF54-FC83490F3519} = {54A7CC97-E1FD-4A85-BFC7-FC12BB3C998B}
 	EndGlobalSection
 EndGlobal
