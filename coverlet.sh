@@ -1,0 +1,1 @@
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info ./test/Encrypto.Tests/Encrypto.Test.csproj

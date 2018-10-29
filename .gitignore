@@ -390,3 +390,6 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+#coverlet
+lcov.info
