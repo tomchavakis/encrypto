@@ -6,7 +6,6 @@ namespace Encrypto.Test
 {
     public class UtilitiesTest
     {
-
         [Test]
         public void Base64Encoding()
         {
@@ -16,7 +15,6 @@ namespace Encrypto.Test
             string base64 = Utilities.Base64Encode(textToByteArray);
             Assert.AreEqual(result,base64);
         }
-
         [Test]
         public void Base64Decoding()
         {
@@ -25,7 +23,6 @@ namespace Encrypto.Test
             byte[] textToByteArray = Utilities.Base64Decode(result);
             string decodedString = ASCIIEncoding.ASCII.GetString(textToByteArray);
             Assert.AreEqual(text,decodedString);
-
         }
     }
 }
