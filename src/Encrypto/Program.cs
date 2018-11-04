@@ -15,31 +15,18 @@ namespace Encrypto
             result.MapResult(
                 (EncryptOptions options) =>
                 {
+                    Helpers helpers = new Helpers(options);
                     if (Directory.Exists(options.InputFile)) // Directory
                     {
-                        Console.WriteLine("Encryption Started...");
-                        string[] filesAndSubDirectories = Directory.GetFileSystemEntries(options.InputFile);
-                        Console.WriteLine("Password:");
-                        string pass =  Utilities.CreateSecurePassword();
-                        Utilities.EncryptSubFolders(filesAndSubDirectories, pass);
-                        Console.WriteLine("Encryption Finished...");
+                        helpers.EncryptDirectories();
                     }
                     else if (File.Exists(options.InputFile)) //File Only
                     {
-                        Console.WriteLine("Encryption Started...");
-                        Console.WriteLine("Password:");
-                        string pass =  Utilities.CreateSecurePassword();
-                        Console.WriteLine(string.Format("{0} | Result:{1}", options.InputFile,
-                            AES.EncryptFile(options.InputFile, options.InputFile, pass)));
-                        Console.WriteLine("Encryption Finished...");
+                        helpers.EncryptFile();
                     }
                     else if (!string.IsNullOrEmpty(options.InputText))
                     {
-                        Console.WriteLine("Encryption Started...");
-                        Console.WriteLine("Password:");
-                        string pass =  Utilities.CreateSecurePassword();                        
-                        Console.WriteLine(string.Format("{1}{0}-->{1}{2}", options.InputText, Environment.NewLine, Utilities.Base64Encode(AES.EncryptText(options.InputText, pass))));
-                        Console.WriteLine("Encryption Finished...");
+                        helpers.EncryptText();
                     }
                     else
                     {
@@ -54,32 +41,18 @@ namespace Encrypto
                 },
                 (DecryptOptions options) =>
                 {
+                    Helpers helpers = new Helpers(options);
                     if (Directory.Exists(options.InputFile)) // Directory
                     {
-                        Console.WriteLine("Decryption Started...");
-                        Console.WriteLine("Password:");
-                        string pass =  Utilities.CreateSecurePassword();
-                        string[] filesAndSubDirectories = Directory.GetFileSystemEntries(options.InputFile);
-                        Utilities.DecryptSubFolders(filesAndSubDirectories, pass);
-                        Console.WriteLine("Decryption Finished...");
+                        helpers.DecryptDirectories();
                     }
                     else if (File.Exists(options.InputFile)) //File Only
                     {
-                        Console.WriteLine("Decryption Started...");
-                        Console.WriteLine("Password:");
-                        string pass =  Utilities.CreateSecurePassword();
-                        Console.WriteLine(string.Format("{0} | Result:{1}", options.InputFile,
-                            AES.DecryptFile(options.InputFile, options.InputFile, pass)));
-                        Console.WriteLine("Decryption Finished...");
+                        helpers.DecryptFile();
                     }
                     else if (!string.IsNullOrEmpty(options.InputText))
                     {
-                        Console.WriteLine("Decryption Started...");
-                        Console.WriteLine("Password:");
-                        string pass =  Utilities.CreateSecurePassword();
-                        byte[] base64Decode = Utilities.Base64Decode(options.InputText);
-                        Console.WriteLine(string.Format("{0}-->{1}{2}", options.InputText, Environment.NewLine, AES.DecryptText(base64Decode, pass)));
-                        Console.WriteLine("Decryption Finished...");
+                        helpers.DecryptText();
                     }
                     else
                     {
