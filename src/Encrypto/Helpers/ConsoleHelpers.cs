@@ -75,7 +75,6 @@ namespace Encrypto
             byte[] base64Decode = Utilities.Base64Decode(_decryptOptions.InputText);
             Console.WriteLine(string.Format("{0}-->{1}{2}", _decryptOptions.InputText, Environment.NewLine, AES.DecryptText(base64Decode, pass)));
             Console.WriteLine("Decryption Finished...");
-
         }
     }
 }
