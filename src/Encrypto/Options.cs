@@ -5,7 +5,7 @@ using CommandLine.Text;
 namespace Encrypto
 {
     [Verb("encrypt", HelpText = "Encrypt File(s) Or Folder(s")]
-    class EncryptOptions
+    public class EncryptOptions
     { //normal options here
 
         [Option('i', "input", HelpText = "Input File(s) or Folder(s) to encrypt.")]
@@ -28,7 +28,7 @@ namespace Encrypto
     }
 
     [Verb("decrypt", HelpText = "Decrypt File(s) Or Folder(s")]
-    class DecryptOptions
+    public class DecryptOptions
     { //normal options here
 
         [Option('i', "input", HelpText = "Input File(s) or Folder(s) to decrypt.")]
