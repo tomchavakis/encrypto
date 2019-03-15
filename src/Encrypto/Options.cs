@@ -16,6 +16,8 @@ namespace Encrypto
         public string Password { get; set; }
         [Option('q', "ask password", Default = false, HelpText = "Ask Password")]
         public bool AskPass { get; set; }
+        [Option('b', "base64", HelpText = "encode content in base64")]
+        public bool Base64Output { get; set; }
 
 
         [Usage(ApplicationAlias = "dotnet-encrypto")]
@@ -47,6 +49,8 @@ namespace Encrypto
 
         [Option('q', "ask password", Default = false, HelpText = "Ask Password")]
         public bool AskPass { get; set; }
+        [Option('b', "base64", HelpText = "encode content in base64")]
+        public bool Base64Output { get; set; }
 
         [Usage(ApplicationAlias = "dotnet-encrypto")]
         public static IEnumerable<Example> Examples

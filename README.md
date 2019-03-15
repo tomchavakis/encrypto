@@ -59,6 +59,10 @@ pass password as command line parameter
 
 `dotnet-encrypto encrypt -i /home/tcs/Downloads/ -p "123"`
 
+**Encrypt File at Base64 output**
+
+`dotnet-encrypto encrypt -i /home/tcs/Downloads/ --base64 -p "123"`
+
 #### Decrypt Folder(s) or Files
 
 `dotnet-encrypto decrypt -i /home/tcs/Downloads/ -q`
@@ -69,6 +73,9 @@ pass password as command line parameter
 
 `dotnet-encrypto decrypt -i /home/tcs/Downloads/ -p "123"`
 
+**Decrypt File at Base64 output**
+
+`dotnet-encrypto decrypt -i /home/tcs/Downloads/ --base64 -p "123"`
 
 #### Encrypt Text:
 
