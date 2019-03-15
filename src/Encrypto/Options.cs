@@ -12,7 +12,14 @@ namespace Encrypto
         public string InputFile { get; set; }
         [Option('t', "text", HelpText = "Insert the text for encryption")]
         public string InputText { get; set; }
+        [Option('p', "password", HelpText = "Password")]
+        public string Password { get; set; }
+        [Option('q', "ask password", Default = false, HelpText = "Ask Password")]
+        public bool AskPass { get; set; }
+
+
         [Usage(ApplicationAlias = "dotnet-encrypto")]
+
         public static IEnumerable<Example> Examples
         {
             get
@@ -35,6 +42,12 @@ namespace Encrypto
         public string InputFile { get; set; }
         [Option('t', "text", HelpText = "Insert the text for decryption")]
         public string InputText { get; set; }
+        [Option('p', "password", HelpText = "Password")]
+        public string Password { get; set; }
+
+        [Option('q', "ask password", Default = false, HelpText = "Ask Password")]
+        public bool AskPass { get; set; }
+
         [Usage(ApplicationAlias = "dotnet-encrypto")]
         public static IEnumerable<Example> Examples
         {
