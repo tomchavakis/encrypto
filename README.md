@@ -51,17 +51,36 @@ Usage :
 
 #### Encrypt Folder(s) or Files :
 
-`dotnet-encrypto encrypt -i /home/tcs/Downloads/`
+`dotnet-encrypto encrypt -i /home/tcs/Downloads/ -q`
+
+or 
+
+pass password as command line parameter
+
+`dotnet-encrypto encrypt -i /home/tcs/Downloads/ -p "123"`
 
 #### Decrypt Folder(s) or Files
 
-`dotnet-encrypto decrypt -i /home/tcs/Downloads/`
+`dotnet-encrypto decrypt -i /home/tcs/Downloads/ -q`
+
+or
+
+pass password as command line parameter
+
+`dotnet-encrypto decrypt -i /home/tcs/Downloads/ -p "123"`
+
 
 #### Encrypt Text:
 
 Create a base64 encoded encrypted text:
 
-`dotnet-encrypto encrypt -t "tom"`
+`dotnet-encrypto encrypt -t "tom" -q`
+
+or
+
+pass password as command line parameter
+
+`dotnet-encrypto encrypt -t "tom" -p "123"`
 
 #### Decrypt Text:
 

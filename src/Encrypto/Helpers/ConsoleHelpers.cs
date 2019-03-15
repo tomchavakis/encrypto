@@ -19,62 +19,103 @@ namespace Encrypto
             _encryptOptions = options;
         }
 
+        public string GetEncryptedPassword()
+        {
+            if (!_encryptOptions.AskPass && string.IsNullOrEmpty(_encryptOptions.Password))
+            {
+                Console.WriteLine("ERROR(S):");
+                Console.WriteLine("-p\t Password is Required");
+                return string.Empty;
+            }
+
+            string pass = string.Empty;
+
+            if (_encryptOptions.AskPass)
+            {
+                Console.WriteLine("Password:");
+                pass = Utilities.CreateSecurePassword();
+                System.Console.WriteLine("\n");
+            }
+            else
+            {
+                pass = _encryptOptions.Password;
+            }
+            return pass;
+        }
+
+        public string GetDecryptedPassword()
+        {
+            if (!_decryptOptions.AskPass && string.IsNullOrEmpty(_decryptOptions.Password))
+            {
+                Console.WriteLine("ERROR(S):");
+                Console.WriteLine("-p\t Password is Required");
+                return string.Empty;
+            }
+
+            string pass = string.Empty;
+
+            if (_decryptOptions.AskPass)
+            {
+                Console.WriteLine("Password:");
+                pass = Utilities.CreateSecurePassword();
+                System.Console.WriteLine("\n");
+            }
+            else
+            {
+                pass = _decryptOptions.Password;
+            }
+            return pass;
+        }
+
         public void EncryptDirectories()
         {
-            Console.WriteLine("Encryption Started...");
             string[] filesAndSubDirectories = Directory.GetFileSystemEntries(_encryptOptions.InputFile);
-            Console.WriteLine("Password:");
-            string pass = Utilities.CreateSecurePassword();
-            Utilities.EncryptSubFolders(filesAndSubDirectories, pass);
-            Console.WriteLine("Encryption Finished...");
+            string pass = GetEncryptedPassword();
+            if (!string.IsNullOrEmpty(pass))
+                Utilities.EncryptSubFolders(filesAndSubDirectories, pass);
         }
 
         public void EncryptFile()
         {
-            Console.WriteLine("Encryption Started...");
-            Console.WriteLine("Password:");
-            string pass = Utilities.CreateSecurePassword();
-            Console.WriteLine(string.Format("{0} | Result:{1}", _encryptOptions.InputFile,
-                AES.EncryptFile(_encryptOptions.InputFile, _encryptOptions.InputFile, pass)));
-            Console.WriteLine("Encryption Finished...");
+            string pass = GetEncryptedPassword();
+            if (!string.IsNullOrEmpty(pass))
+                Console.WriteLine(string.Format("{0} | Result:{1}", _encryptOptions.InputFile, AES.EncryptFile(_encryptOptions.InputFile, _encryptOptions.InputFile, pass)));
         }
 
         public void EncryptText()
         {
-            Console.WriteLine("Encryption Started...");
-            Console.WriteLine("Password:");
-            string pass = Utilities.CreateSecurePassword();
-            Console.WriteLine(string.Format("{1}{0}-->{1}{2}", _encryptOptions.InputText, Environment.NewLine, Utilities.Base64Encode(AES.EncryptText(_encryptOptions.InputText, pass))));
-            Console.WriteLine("Encryption Finished...");
+            string pass = GetEncryptedPassword();
+            if (!string.IsNullOrEmpty(pass))
+                Console.WriteLine(Utilities.Base64Encode(AES.EncryptText(_encryptOptions.InputText, pass)));
         }
 
         public void DecryptDirectories()
         {
-            Console.WriteLine("Decryption Started...");
-            Console.WriteLine("Password:");
-            string pass = Utilities.CreateSecurePassword();
-            string[] filesAndSubDirectories = Directory.GetFileSystemEntries(_decryptOptions.InputFile);
-            Utilities.DecryptSubFolders(filesAndSubDirectories, pass);
-            Console.WriteLine("Decryption Finished...");
+            string pass = GetDecryptedPassword();
+            if (!string.IsNullOrEmpty(pass))
+            {
+                string[] filesAndSubDirectories = Directory.GetFileSystemEntries(_decryptOptions.InputFile);
+                Utilities.DecryptSubFolders(filesAndSubDirectories, pass);
+            }
         }
 
         public void DecryptFile()
         {
-            Console.WriteLine("Decryption Started...");
-            Console.WriteLine("Password:");
-            string pass = Utilities.CreateSecurePassword();
-            Console.WriteLine(string.Format("{0} | Result:{1}", _decryptOptions.InputFile,
-                AES.DecryptFile(_decryptOptions.InputFile, _decryptOptions.InputFile, pass)));
-            Console.WriteLine("Decryption Finished...");
+            string pass = GetDecryptedPassword();
+            if (!string.IsNullOrEmpty(pass))
+            {
+                Console.WriteLine(string.Format("{0} | Result:{1}", _decryptOptions.InputFile, AES.DecryptFile(_decryptOptions.InputFile, _decryptOptions.InputFile, pass)));
+            }
         }
+        
         public void DecryptText()
         {
-            Console.WriteLine("Decryption Started...");
-            Console.WriteLine("Password:");
-            string pass = Utilities.CreateSecurePassword();
-            byte[] base64Decode = Utilities.Base64Decode(_decryptOptions.InputText);
-            Console.WriteLine(string.Format("{0}-->{1}{2}", _decryptOptions.InputText, Environment.NewLine, AES.DecryptText(base64Decode, pass)));
-            Console.WriteLine("Decryption Finished...");
+            string pass = GetDecryptedPassword();
+            if (!string.IsNullOrEmpty(pass))
+            {
+                byte[] base64Decode = Utilities.Base64Decode(_decryptOptions.InputText);
+                Console.WriteLine(AES.DecryptText(base64Decode, pass));
+            }
         }
     }
 }
