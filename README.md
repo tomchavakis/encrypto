@@ -84,7 +84,11 @@ pass password as command line parameter
 
 #### Decrypt Text:
 
-`dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g=="`
+`dotnet-encrypto decrypt -t ""P/A6VZEaRHCB8WV9S5m58g==" -q`
+
+or
+
+`dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g==" -p "123"`
 
 ## Nuget
 
