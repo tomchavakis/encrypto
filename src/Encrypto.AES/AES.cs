@@ -11,7 +11,7 @@ namespace Encrypto.AESLibrary
         public static byte[] GetEncryptedByteArray(byte[] encryptedBytes, byte[] password)
         {
             //the salt bytes must be at least 8 bytes
-            byte[] saltBytes = new byte[] {1, 2, 3, 4, 5, 6, 7, 8};
+            byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
             using (MemoryStream ms = new MemoryStream())
             {
                 byte[] encyptedbytes = null;
@@ -38,7 +38,7 @@ namespace Encrypto.AESLibrary
         public static byte[] GetDecryptedByteArray(byte[] bytesDecrypted, byte[] password)
         {
             byte[] decrypted = null;
-            byte[] saltBytes = new byte[] {1, 2, 3, 4, 5, 6, 7, 8};
+            byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
             using (MemoryStream ms = new MemoryStream())
             {
                 using (RijndaelManaged aes = new RijndaelManaged())
@@ -83,7 +83,7 @@ namespace Encrypto.AESLibrary
             }
         }
 
-        public static string EncryptFile(string inputFile, string outputFile, string password)
+        public static string EncryptFile(string inputFile, string outputFile, string password, bool base64Encoding = false)
         {
             ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
             try
@@ -94,7 +94,15 @@ namespace Encrypto.AESLibrary
                 //hash the password with sha256
                 passwordToByteArray = SHA256.Create().ComputeHash(passwordToByteArray);
                 byte[] encryptedByteArray = AES.GetEncryptedByteArray(encryptedBytes, passwordToByteArray);
-                File.WriteAllBytes(outputFile, encryptedByteArray);
+                if (base64Encoding)
+                {
+                    string base64 = System.Convert.ToBase64String(encryptedByteArray, Base64FormattingOptions.None);
+                    File.WriteAllText(outputFile, base64, Encoding.UTF8);
+                }
+                else
+                {
+                    File.WriteAllBytes(outputFile, encryptedByteArray);
+                }
                 return "encryption succeeded";
             }
             catch (Exception)
@@ -107,7 +115,7 @@ namespace Encrypto.AESLibrary
             }
         }
 
-        public static string DecryptFile(string inputFile, string outputFile, string password)
+        public static string DecryptFile(string inputFile, string outputFile, string password, bool base64Decoding = false)
         {
             ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
             try
@@ -116,8 +124,17 @@ namespace Encrypto.AESLibrary
                 byte[] bytesToBeDecrypted = File.ReadAllBytes(outputFile);
                 byte[] passwordBytes = System.Text.Encoding.ASCII.GetBytes(password);
                 passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-                byte[] bytesDecrypted = AES.GetDecryptedByteArray(bytesToBeDecrypted, passwordBytes);
-                File.WriteAllBytes(outputFile, bytesDecrypted);
+                if (base64Decoding)
+                {
+                    byte[] result = System.Convert.FromBase64String(File.ReadAllText(outputFile, Encoding.UTF8));
+                    byte[] bytesDecrypted = AES.GetDecryptedByteArray(result, passwordBytes);
+                    File.WriteAllBytes(outputFile, bytesDecrypted);
+                }
+                else
+                {
+                    byte[] bytesDecrypted = AES.GetDecryptedByteArray(bytesToBeDecrypted, passwordBytes);
+                    File.WriteAllBytes(outputFile, bytesDecrypted);
+                }
                 return "Decryption succeeded";
             }
             catch (Exception)
