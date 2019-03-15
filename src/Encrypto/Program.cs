@@ -16,6 +16,7 @@ namespace Encrypto
                 (EncryptOptions options) =>
                 {
                     Helpers helpers = new Helpers(options);
+                    
                     if (Directory.Exists(options.InputFile)) // Directory
                     {
                         helpers.EncryptDirectories();
@@ -30,9 +31,9 @@ namespace Encrypto
                     }
                     else
                     {
+                        Console.WriteLine("ERROR(S):");
                         if (string.IsNullOrEmpty(options.InputFile) || string.IsNullOrEmpty(options.InputText))
                         {
-                            Console.WriteLine("ERROR(S):");
                             Console.WriteLine("-i\tInput File(s) or Folder(s) to encrypt.");
                             Console.WriteLine("-t\tInsert the text to encrypt.");
                         }
