@@ -1,4 +1,4 @@
-# Encryption Tool [![CodeFactor](https://www.codefactor.io/repository/github/tomchavakis/encrypto/badge)](https://www.codefactor.io/repository/github/tomchavakis/encrypto/overview/develop) [![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)
+# Encryption Tool [![CodeFactor](https://www.codefactor.io/repository/github/tomchavakis/encrypto/badge)](https://www.codefactor.io/repository/github/tomchavakis/encrypto/overview/develop) [![Build Status](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop)](https://travis-ci.com/tomchavakis/encrypto.svg?branch=develop) [![NuGet](https://img.shields.io/nuget/v/BeatPulse.svg)](https://www.nuget.org/packages/dotnet-encrypto)
 
 ## Application - Instructions
 
@@ -91,7 +91,11 @@ pass password as command line parameter
 
 #### Decrypt Text:
 
-`dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g=="`
+`dotnet-encrypto decrypt -t ""P/A6VZEaRHCB8WV9S5m58g==" -q`
+
+or
+
+`dotnet-encrypto decrypt -t "P/A6VZEaRHCB8WV9S5m58g==" -p "123"`
 
 ## Nuget
 
