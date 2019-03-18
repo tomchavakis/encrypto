@@ -94,14 +94,15 @@ namespace Encrypto.AESLibrary
                 //hash the password with sha256
                 passwordToByteArray = SHA256.Create().ComputeHash(passwordToByteArray);
                 byte[] encryptedByteArray = AES.GetEncryptedByteArray(encryptedBytes, passwordToByteArray);
+                string writeAt = !string.IsNullOrEmpty(outputFile) ? outputFile : inputFile;
                 if (base64Encoding)
                 {
                     string base64 = System.Convert.ToBase64String(encryptedByteArray, Base64FormattingOptions.None);
-                    File.WriteAllText(outputFile, base64, Encoding.UTF8);
+                    File.WriteAllText(writeAt, base64, Encoding.UTF8);
                 }
                 else
                 {
-                    File.WriteAllBytes(outputFile, encryptedByteArray);
+                    File.WriteAllBytes(writeAt, encryptedByteArray);
                 }
                 return "encryption succeeded";
             }
@@ -121,19 +122,21 @@ namespace Encrypto.AESLibrary
             try
             {
                 locker.EnterReadLock();
-                byte[] bytesToBeDecrypted = File.ReadAllBytes(outputFile);
+                byte[] bytesToBeDecrypted = File.ReadAllBytes(inputFile);
                 byte[] passwordBytes = System.Text.Encoding.ASCII.GetBytes(password);
                 passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+                string writeAt = !string.IsNullOrEmpty(outputFile) ? outputFile : inputFile;
+
                 if (base64Decoding)
                 {
-                    byte[] result = System.Convert.FromBase64String(File.ReadAllText(outputFile, Encoding.UTF8));
+                    byte[] result = System.Convert.FromBase64String(File.ReadAllText(inputFile, Encoding.UTF8));
                     byte[] bytesDecrypted = AES.GetDecryptedByteArray(result, passwordBytes);
-                    File.WriteAllBytes(outputFile, bytesDecrypted);
+                    File.WriteAllBytes(writeAt, bytesDecrypted);
                 }
                 else
                 {
                     byte[] bytesDecrypted = AES.GetDecryptedByteArray(bytesToBeDecrypted, passwordBytes);
-                    File.WriteAllBytes(outputFile, bytesDecrypted);
+                    File.WriteAllBytes(writeAt, bytesDecrypted);
                 }
                 return "Decryption succeeded";
             }

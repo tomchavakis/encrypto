@@ -16,6 +16,9 @@ namespace Encrypto
         public string Password { get; set; }
         [Option('q', "ask password", Default = false, HelpText = "Ask Password")]
         public bool AskPass { get; set; }
+        [Option('o', "output", HelpText = "Output File")]
+        public string OutputFile { get; set; }
+
         [Option('b', "base64", HelpText = "encode content in base64")]
         public bool Base64Output { get; set; }
 
@@ -49,6 +52,9 @@ namespace Encrypto
 
         [Option('q', "ask password", Default = false, HelpText = "Ask Password")]
         public bool AskPass { get; set; }
+        [Option('o', "output", HelpText = "Output File")]
+        public string OutputFile { get; set; }
+
         [Option('b', "base64", HelpText = "encode content in base64")]
         public bool Base64Output { get; set; }
 
