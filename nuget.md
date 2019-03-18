@@ -69,6 +69,11 @@ dotnet-encrypto encrypt -i /home/tcs/Downloads/ -p "123"
 dotnet-encrypto encrypt -i /home/tcs/Downloads/file.txt --base64 -p "123" 
 ```
 
+**encrypt file with output parameter**
+```
+dotnet-encrypto encrypt -i ~/Downloads/logs/elastic-search.txt -p "123" -o ~/Downloads/logs/elastic-search-encrypt.log --base64
+```
+
 **Encrypt Text:**
 
 Create a base64 encoded encrypted text:
@@ -103,6 +108,10 @@ dotnet-encrypto decrypt -i /home/tcs/Downloads/ -p "123"
 dotnet-encrypto decrypt -i /home/tcs/Downloads/ --base64 -p "123"
 ```
 
+**decrypt file with output parameter**
+```
+dotnet-encrypto decrypt -i ~/Downloads/logs/elastic-search-encrypt.log -p "123" -o ~/Downloads/logs/elastic-search-txt --base64
+```
 
 #### Decrypt Text:
 
