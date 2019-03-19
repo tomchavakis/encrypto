@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -99,6 +100,19 @@ namespace Encrypto.AESLibrary
                 {
                     string base64 = System.Convert.ToBase64String(encryptedByteArray, Base64FormattingOptions.None);
                     File.WriteAllText(writeAt, base64, Encoding.UTF8);
+
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        System.Console.WriteLine(RuntimeInformation.OSDescription);
+                        var ENCRYPTO_PATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "encrypto.settings");
+                        string content = string.Format("{0} {1}", inputFile, outputFile);
+                        File.WriteAllText(ENCRYPTO_PATH, content);
+                    }
+                    else
+                    {
+                    }
+
+
                 }
                 else
                 {
