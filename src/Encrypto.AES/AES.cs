@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace Encrypto.AESLibrary
 {
@@ -95,10 +97,44 @@ namespace Encrypto.AESLibrary
                 passwordToByteArray = SHA256.Create().ComputeHash(passwordToByteArray);
                 byte[] encryptedByteArray = AES.GetEncryptedByteArray(encryptedBytes, passwordToByteArray);
                 string writeAt = !string.IsNullOrEmpty(outputFile) ? outputFile : inputFile;
+
                 if (base64Encoding)
                 {
                     string base64 = System.Convert.ToBase64String(encryptedByteArray, Base64FormattingOptions.None);
                     File.WriteAllText(writeAt, base64, Encoding.UTF8);
+
+                    if (!string.IsNullOrEmpty(outputFile))
+                    {
+                        string encryptoSettingsFileName = "encrypto.settings";
+
+                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                        {
+                            var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "encrypto");
+                            if (!Directory.Exists(encryptoPath))
+                                Directory.CreateDirectory(encryptoPath);
+                            var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
+                            MappingModel mapping = new MappingModel();
+                            mapping.original = inputFile;
+                            mapping.encrypted = outputFile;
+                            string content = JsonConvert.SerializeObject(mapping);
+                            File.WriteAllText(encryptoSettingsPath, content); // %AppData%/encrypto/encrypto.settings
+                        }
+
+                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                        {
+                            System.Console.WriteLine(RuntimeInformation.OSDescription);
+                            var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".encrypto");
+                            if (!Directory.Exists(encryptoPath))
+                                Directory.CreateDirectory(encryptoPath);
+
+                            var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
+                            MappingModel mapping = new MappingModel();
+                            mapping.original = inputFile;
+                            mapping.encrypted = outputFile;
+                            string content = JsonConvert.SerializeObject(mapping);
+                            File.WriteAllText(encryptoSettingsPath, content); // ~/.encrypto/encrypto.settings
+                        }
+                    }
                 }
                 else
                 {
@@ -129,8 +165,36 @@ namespace Encrypto.AESLibrary
 
                 if (base64Decoding)
                 {
+                    MappingModel mapping = new MappingModel();
+                    string encryptoSettingsFileName = "encrypto.settings";
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "encrypto");
+                        if (Directory.Exists(encryptoPath))
+                        {
+                            var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
+                            string content = File.ReadAllText(encryptoSettingsPath);
+                            mapping = JsonConvert.DeserializeObject<MappingModel>(content);
+                        }
+                    }
+
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    {
+                        var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".encrypto");
+                        if (!Directory.Exists(encryptoPath))
+                            Directory.CreateDirectory(encryptoPath);
+
+                        var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
+                        string content = File.ReadAllText(encryptoSettingsPath);
+                        mapping = JsonConvert.DeserializeObject<MappingModel>(content);
+                    }
+
+
                     byte[] result = System.Convert.FromBase64String(File.ReadAllText(inputFile, Encoding.UTF8));
                     byte[] bytesDecrypted = AES.GetDecryptedByteArray(result, passwordBytes);
+
+                    writeAt = string.IsNullOrEmpty(mapping.original) ? writeAt : mapping.original;
+
                     File.WriteAllBytes(writeAt, bytesDecrypted);
                 }
                 else
