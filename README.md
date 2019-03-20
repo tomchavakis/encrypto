@@ -41,6 +41,8 @@ dotnet-encrypto encrypt -i /home/tcs/Downloads/file.txt --base64 -p "123"
 dotnet-encrypto encrypt -i ~/Downloads/logs/elastic-search.txt -p "123" -o ~/Downloads/logs/elastic-search-encrypt.log --base64
 ```
 
+dotnet-encrypto generate a mapping file for safety reasons. In case you delete the original file from the directory but you keep the encrypted file, after decryption the tool will restore the original unencrypted file  
+
 **Encrypt Text:**
 
 Create a base64 encoded encrypted text:
