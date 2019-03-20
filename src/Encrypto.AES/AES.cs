@@ -122,7 +122,6 @@ namespace Encrypto.AESLibrary
 
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                         {
-                            System.Console.WriteLine(RuntimeInformation.OSDescription);
                             var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".encrypto");
                             if (!Directory.Exists(encryptoPath))
                                 Directory.CreateDirectory(encryptoPath);
