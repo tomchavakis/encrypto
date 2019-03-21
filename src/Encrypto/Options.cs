@@ -22,6 +22,8 @@ namespace Encrypto
         [Option('b', "base64", HelpText = "encode content in base64")]
         public bool Base64Output { get; set; }
 
+        [Option('l', "local-output", HelpText = "encrypto.settings to the current folder")]
+        public bool LocalOutput { get; set; }
 
         [Usage(ApplicationAlias = "dotnet-encrypto")]
 

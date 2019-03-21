@@ -79,7 +79,7 @@ namespace Encrypto
         {
             string pass = GetEncryptedPassword();
             if (!string.IsNullOrEmpty(pass))
-                Console.WriteLine(string.Format("{0} | Result:{1}", _encryptOptions.InputFile, AES.EncryptFile(_encryptOptions.InputFile, _encryptOptions.OutputFile, pass, _encryptOptions.Base64Output)));
+                Console.WriteLine(string.Format("{0} | Result:{1}", _encryptOptions.InputFile, AES.EncryptFile(_encryptOptions.InputFile, _encryptOptions.OutputFile, pass, _encryptOptions.Base64Output, _encryptOptions.LocalOutput)));
         }
 
         public void EncryptText()
