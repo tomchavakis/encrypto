@@ -193,13 +193,35 @@ namespace Encrypto.AESLibrary
                                 string content = File.ReadAllText(encryptoSettingsPath);
                                 mapping = JsonConvert.DeserializeObject<MappingModel>(content);
                             }
+                            else
+                            {
+                                string encryptoSettings = Path.Combine(Path.GetDirectoryName(inputFile), encryptoSettingsFileName);
+                                if (File.Exists(encryptoSettings))
+                                {
+                                    string content = File.ReadAllText(encryptoSettings);
+                                    mapping = JsonConvert.DeserializeObject<MappingModel>(content);
+                                }
+                            }
                         }
 
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                         {
                             var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".encrypto");
-                            if (!Directory.Exists(encryptoPath))
-                                Directory.CreateDirectory(encryptoPath);
+                            if (Directory.Exists(encryptoPath))
+                            {
+                                var encryptoSettings = Path.Combine(encryptoPath, encryptoSettingsFileName);
+                                string contentMapping = File.ReadAllText(encryptoSettings);
+                                mapping = JsonConvert.DeserializeObject<MappingModel>(contentMapping);
+                            }
+                            else
+                            {
+                                string encryptoSettings = Path.Combine(Path.GetDirectoryName(inputFile), encryptoSettingsFileName);
+                                if (File.Exists(encryptoSettings))
+                                {
+                                    string contentMapping = File.ReadAllText(encryptoSettings);
+                                    mapping = JsonConvert.DeserializeObject<MappingModel>(contentMapping);
+                                }
+                            }
 
                             var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
                             string content = File.ReadAllText(encryptoSettingsPath);
