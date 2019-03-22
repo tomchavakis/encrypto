@@ -102,8 +102,6 @@ namespace Encrypto.AESLibrary
                 {
                     string base64 = System.Convert.ToBase64String(encryptedByteArray, Base64FormattingOptions.None);
                     File.WriteAllText(writeAt, base64, Encoding.UTF8);
-
-
                     string encryptoSettingsFileName = "encrypto.settings";
 
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -149,7 +147,6 @@ namespace Encrypto.AESLibrary
                         string content = JsonConvert.SerializeObject(mapping);
                         File.WriteAllText(encryptoSettingsPath, content); // ~/.encrypto/encrypto.settings
                     }
-
                 }
                 else
                 {
