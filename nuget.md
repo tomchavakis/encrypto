@@ -78,7 +78,7 @@ dotnet-encrypto generate a mapping file for safety reasons. In case you delete t
 
 **--local-output**
 ```
-dotnet dotnet-encrypto.dll encrypt -i ~/Downloads/logs/original.log -o ~/Downloads/logs/encrypted.log -p "123" --base64 --local-output
+dotnet-encrypto encrypt -i ~/Downloads/logs/original.log -o ~/Downloads/logs/encrypted.log -p "123" --base64 --local-output
 ```
 generate output file at the folder of the input file
 
