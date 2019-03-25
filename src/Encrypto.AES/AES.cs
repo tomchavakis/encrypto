@@ -181,21 +181,23 @@ namespace Encrypto.AESLibrary
                     if (string.IsNullOrEmpty(outputFile))
                     {
                         string encryptoSettingsFileName = "encrypto.settings";
+
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                         {
+                            var encryptolocalPath = Path.Combine(Path.GetDirectoryName(inputFile), encryptoSettingsFileName);
                             var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "encrypto");
-                            if (Directory.Exists(encryptoPath))
+
+                            if (File.Exists(encryptolocalPath))
                             {
-                                var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
-                                string content = File.ReadAllText(encryptoSettingsPath);
+                                string content = File.ReadAllText(encryptolocalPath);
                                 mapping = JsonConvert.DeserializeObject<MappingModel>(content);
                             }
                             else
                             {
-                                string encryptoSettings = Path.Combine(Path.GetDirectoryName(inputFile), encryptoSettingsFileName);
-                                if (File.Exists(encryptoSettings))
+                                if (Directory.Exists(encryptoPath))
                                 {
-                                    string content = File.ReadAllText(encryptoSettings);
+                                    var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
+                                    string content = File.ReadAllText(encryptoSettingsPath);
                                     mapping = JsonConvert.DeserializeObject<MappingModel>(content);
                                 }
                             }
@@ -203,26 +205,23 @@ namespace Encrypto.AESLibrary
 
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                         {
+                            var encryptolocalPath = Path.Combine(Path.GetDirectoryName(inputFile), encryptoSettingsFileName); // localFile
                             var encryptoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".encrypto");
-                            if (Directory.Exists(encryptoPath))
+
+                            if (File.Exists(encryptolocalPath))
                             {
-                                var encryptoSettings = Path.Combine(encryptoPath, encryptoSettingsFileName);
-                                string contentMapping = File.ReadAllText(encryptoSettings);
+                                string contentMapping = File.ReadAllText(encryptolocalPath);
                                 mapping = JsonConvert.DeserializeObject<MappingModel>(contentMapping);
                             }
                             else
                             {
-                                string encryptoSettings = Path.Combine(Path.GetDirectoryName(inputFile), encryptoSettingsFileName);
-                                if (File.Exists(encryptoSettings))
+                                if (Directory.Exists(encryptoPath))
                                 {
+                                    var encryptoSettings = Path.Combine(encryptoPath, encryptoSettingsFileName);
                                     string contentMapping = File.ReadAllText(encryptoSettings);
                                     mapping = JsonConvert.DeserializeObject<MappingModel>(contentMapping);
                                 }
                             }
-
-                            var encryptoSettingsPath = Path.Combine(encryptoPath, encryptoSettingsFileName);
-                            string content = File.ReadAllText(encryptoSettingsPath);
-                            mapping = JsonConvert.DeserializeObject<MappingModel>(content);
                         }
                     }
 
