@@ -110,12 +110,21 @@ namespace Encrypto
 
         public void DecryptText()
         {
-            string pass = GetDecryptedPassword();
-            if (!string.IsNullOrEmpty(pass))
+            if (!AES.isValidBase64(_decryptOptions.InputText))
             {
-                byte[] base64Decode = Utilities.Base64Decode(_decryptOptions.InputText);
-                Console.WriteLine(AES.DecryptText(base64Decode, pass));
+                System.Console.WriteLine("Error: Invalid base64");
             }
+            else
+            {
+                string pass = GetDecryptedPassword();
+                if (!string.IsNullOrEmpty(pass))
+                {
+                    byte[] base64Decode = Utilities.Base64Decode(_decryptOptions.InputText);
+                    Console.WriteLine(AES.DecryptText(base64Decode, pass));
+                }
+            }
+
+
         }
     }
 }

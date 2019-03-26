@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Encrypto.AESLibrary;
 
 namespace Encrypto.Utils
@@ -16,6 +17,8 @@ namespace Encrypto.Utils
         {
             return System.Convert.FromBase64String(plainText);
         }
+
+        
 
         public static string CreateSecurePassword()
         {
@@ -106,7 +109,7 @@ namespace Encrypto.Utils
 
             return System.Text.ASCIIEncoding.Default.GetString(bytes, bytes.Length - count, count);
         }
-        
+
         private static Tuple<string, string> MakeError()
         {
             return Tuple.Create("\0", "\0");
