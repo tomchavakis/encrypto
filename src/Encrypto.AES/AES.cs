@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
-
 namespace Encrypto.AESLibrary
 {
     public class AES
@@ -225,12 +224,18 @@ namespace Encrypto.AESLibrary
                         }
                     }
 
-                    byte[] result = System.Convert.FromBase64String(File.ReadAllText(inputFile, Encoding.UTF8));
-                    byte[] bytesDecrypted = AES.GetDecryptedByteArray(result, passwordBytes);
-
-                    writeAt = string.IsNullOrEmpty(mapping.original) ? writeAt : mapping.original;
-
-                    File.WriteAllBytes(writeAt, bytesDecrypted);
+                    string base64Content = File.ReadAllText(inputFile, Encoding.UTF8);
+                    if (!isValidBase64(base64Content))
+                    {
+                        System.Console.WriteLine("Error: Invalid base64");
+                    }
+                    else
+                    {
+                        byte[] result = System.Convert.FromBase64String(base64Content);
+                        byte[] bytesDecrypted = AES.GetDecryptedByteArray(result, passwordBytes);
+                        writeAt = string.IsNullOrEmpty(mapping.original) ? writeAt : mapping.original;
+                        File.WriteAllBytes(writeAt, bytesDecrypted);
+                    }
                 }
                 else
                 {
@@ -269,6 +274,23 @@ namespace Encrypto.AESLibrary
             {
                 locker.ExitReadLock();
             }
+        }
+
+
+        public static bool isValidBase64(string payload)
+        {
+            bool result = true;
+
+            try
+            {
+                byte[] base64Arr = System.Convert.FromBase64String(payload);
+            }
+            catch (System.Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }
