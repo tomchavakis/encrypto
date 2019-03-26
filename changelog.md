@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.1.3]
+## [1.1.4]
 ### Added
 
 - Added base64 validation
