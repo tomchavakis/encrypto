@@ -228,6 +228,7 @@ namespace Encrypto.AESLibrary
                     if (!isValidBase64(base64Content))
                     {
                         System.Console.WriteLine("Error: Invalid base64");
+                        return "Decryption failed";
                     }
                     else
                     {
